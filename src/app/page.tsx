@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { 
-  ArrowUpRight, 
-  ArrowDownLeft, 
-  ShieldAlert, 
-  Cpu, 
-  FileCheck2 
+import {
+  ArrowUpRight,
+  ArrowDownLeft,
+  ShieldAlert,
+  Cpu,
+  FileCheck2,
 } from "lucide-react";
 
 export default function Home() {
@@ -17,8 +17,12 @@ export default function Home() {
             <Cpu size={24} />
           </div>
           <div>
-            <span className="text-xs font-mono uppercase tracking-widest text-primary/80">Productivity Tool</span>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight">CargoDoc</h2>
+            <span className="text-xs font-mono uppercase tracking-widest text-primary/80">
+              Productivity Tool
+            </span>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight">
+              CargoDoc
+            </h2>
           </div>
         </div>
 
@@ -27,19 +31,24 @@ export default function Home() {
             Welcome to CargoDoc
           </h1>
           <p className="text-base text-muted-foreground leading-relaxed max-w-2xl">
-            CargoDoc helps automate Import and Export PDF extraction for confidential taxation and logistics documents. 
-            Eliminate manual typing and verify shipping records in a clean, interactive grid in seconds.
+            CargoDoc helps automate Import and Export PDF extraction for
+            confidential taxation and logistics documents. Eliminate manual
+            typing and verify shipping records in a clean, interactive grid in
+            seconds.
           </p>
         </div>
 
         {/* Privacy Notice Box */}
-        <div className="flex items-start gap-4 p-5 bg-amber-500/[0.04] border border-amber-500/20 rounded-2xl">
+        <div className="flex items-start gap-4 p-5 bg-amber-500/4 border border-amber-500/20 rounded-2xl">
           <ShieldAlert className="text-amber-500 shrink-0 mt-0.5" size={20} />
           <div className="space-y-1">
-            <h4 className="text-sm font-semibold text-foreground">Strict Privacy Notice</h4>
+            <h4 className="text-sm font-semibold text-foreground">
+              Strict Privacy Notice
+            </h4>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Uploaded documents are processed only during the current session and are never permanently stored. 
-              Closing the browser tab or refreshing will purge all records from system memory immediately.
+              Uploaded documents are processed only during the current session
+              and are never permanently stored. Closing the browser tab or
+              refreshing will purge all records from system memory immediately.
             </p>
           </div>
         </div>
@@ -64,10 +73,15 @@ export default function Home() {
               </div>
               <div className="mt-8 space-y-2">
                 <h4 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors flex items-center gap-1.5">
-                  Export Module <FileCheck2 size={16} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                  Export Module{" "}
+                  <FileCheck2
+                    size={16}
+                    className="opacity-0 group-hover:opacity-100 transition-opacity"
+                  />
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Upload multiple Export bills of lading/declaration PDFs to extract Export No, Date, Barge, and VINs.
+                  Upload multiple Export bills of lading/declaration PDFs to
+                  extract Export No, Date, Barge, and VINs.
                 </p>
               </div>
             </div>
@@ -86,10 +100,15 @@ export default function Home() {
               </div>
               <div className="mt-8 space-y-2">
                 <h4 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors flex items-center gap-1.5">
-                  Import Module <FileCheck2 size={16} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                  Import Module{" "}
+                  <FileCheck2
+                    size={16}
+                    className="opacity-0 group-hover:opacity-100 transition-opacity"
+                  />
                 </h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Upload multiple Import declarations. Extract standard fields plus an extra third-level verification column.
+                  Upload multiple Import declarations. Extract standard fields
+                  plus an extra third-level verification column.
                 </p>
               </div>
             </div>

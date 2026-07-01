@@ -12,19 +12,19 @@ import {
   SortingState,
 } from "@tanstack/react-table";
 import { ExtractedRecord } from "@/features/parser/types";
-import { 
-  ArrowUpDown, 
-  Trash2, 
-  Undo2, 
-  Download, 
-  Search, 
-  FileSpreadsheet, 
-  FileCode, 
-  Copy, 
-  AlertTriangle, 
+import {
+  ArrowUpDown,
+  Trash2,
+  Undo2,
+  Download,
+  Search,
+  FileSpreadsheet,
+  FileCode,
+  Copy,
+  AlertTriangle,
   CheckCircle,
   Eye,
-  EyeOff
+  EyeOff,
 } from "lucide-react";
 import * as XLSX from "xlsx";
 
@@ -80,10 +80,11 @@ export function DataTable({
         ),
         cell: ({ row, getValue }) => {
           const val = getValue<string>();
-          const hasError = row.original.validationErrors.includes("Missing Date") || 
-                           row.original.validationErrors.includes("Invalid Date format");
+          const hasError =
+            row.original.validationErrors.includes("Missing Date") ||
+            row.original.validationErrors.includes("Invalid Date format");
           return (
-            <div 
+            <div
               className={`font-mono text-sm px-2 py-1 rounded select-all cursor-pointer flex items-center justify-between group ${
                 hasError ? "bg-red-500/10 text-red-500 font-semibold" : ""
               }`}
@@ -91,7 +92,10 @@ export function DataTable({
               title="Double click to copy"
             >
               <span>{val || "MISSING"}</span>
-              <Copy size={12} className="opacity-0 group-hover:opacity-60 transition-opacity ml-2" />
+              <Copy
+                size={12}
+                className="opacity-0 group-hover:opacity-60 transition-opacity ml-2"
+              />
             </div>
           );
         },
@@ -108,9 +112,11 @@ export function DataTable({
         ),
         cell: ({ row, getValue }) => {
           const val = getValue<string>();
-          const hasError = row.original.validationErrors.includes("Missing Export Number");
+          const hasError = row.original.validationErrors.includes(
+            "Missing Export Number",
+          );
           return (
-            <div 
+            <div
               className={`font-mono text-sm px-2 py-1 rounded select-all cursor-pointer flex items-center justify-between group ${
                 hasError ? "bg-red-500/10 text-red-500 font-semibold" : ""
               }`}
@@ -118,7 +124,10 @@ export function DataTable({
               title="Double click to copy"
             >
               <span>{val || "MISSING"}</span>
-              <Copy size={12} className="opacity-0 group-hover:opacity-60 transition-opacity ml-2" />
+              <Copy
+                size={12}
+                className="opacity-0 group-hover:opacity-60 transition-opacity ml-2"
+              />
             </div>
           );
         },
@@ -136,13 +145,16 @@ export function DataTable({
         cell: ({ row, getValue }) => {
           const val = getValue<string>();
           return (
-            <div 
+            <div
               className="font-mono text-sm px-2 py-1 rounded select-all cursor-pointer flex items-center justify-between group"
               onDoubleClick={() => handleCopy(val, `${row.id}-barge`)}
               title="Double click to copy"
             >
               <span>{val || "-"}</span>
-              <Copy size={12} className="opacity-0 group-hover:opacity-60 transition-opacity ml-2" />
+              <Copy
+                size={12}
+                className="opacity-0 group-hover:opacity-60 transition-opacity ml-2"
+              />
             </div>
           );
         },
@@ -162,23 +174,32 @@ export function DataTable({
           const errors = row.original.validationErrors;
           const isDuplicate = errors.includes("Duplicate VIN");
           const isMissing = errors.includes("Missing VIN");
-          const isInvalidLen = errors.includes("Invalid VIN length (must be 17 characters)");
-          
+          const isInvalidLen = errors.includes(
+            "Invalid VIN length (must be 17 characters)",
+          );
+
           let vinStyle = "";
           if (isDuplicate) {
-            vinStyle = "bg-amber-500/10 text-amber-500 font-semibold border border-amber-500/20";
+            vinStyle =
+              "bg-amber-500/10 text-amber-500 font-semibold border border-amber-500/20";
           } else if (isMissing || isInvalidLen) {
-            vinStyle = "bg-red-500/10 text-red-500 font-semibold border border-red-500/20";
+            vinStyle =
+              "bg-red-500/10 text-red-500 font-semibold border border-red-500/20";
           }
 
           return (
-            <div 
+            <div
               className={`font-mono text-sm px-2 py-1 rounded select-all cursor-pointer flex items-center justify-between group ${vinStyle}`}
               onDoubleClick={() => handleCopy(val, `${row.id}-vin`)}
-              title={isDuplicate ? "Duplicate VIN detected" : "Double click to copy"}
+              title={
+                isDuplicate ? "Duplicate VIN detected" : "Double click to copy"
+              }
             >
               <span>{val || "MISSING"}</span>
-              <Copy size={12} className="opacity-0 group-hover:opacity-60 transition-opacity ml-2" />
+              <Copy
+                size={12}
+                className="opacity-0 group-hover:opacity-60 transition-opacity ml-2"
+              />
             </div>
           );
         },
@@ -191,7 +212,9 @@ export function DataTable({
           return (
             <EditableCell
               value={initialValue}
-              onSave={(newValue) => updateRecord({ ...row.original, firstCheck: newValue })}
+              onSave={(newValue) =>
+                updateRecord({ ...row.original, firstCheck: newValue })
+              }
             />
           );
         },
@@ -204,14 +227,14 @@ export function DataTable({
           return (
             <EditableCell
               value={initialValue}
-              onSave={(newValue) => updateRecord({ ...row.original, secondCheck: newValue })}
+              onSave={(newValue) =>
+                updateRecord({ ...row.original, secondCheck: newValue })
+              }
             />
           );
         },
       },
     ];
-
-
 
     cols.push(
       {
@@ -222,7 +245,9 @@ export function DataTable({
           return (
             <EditableCell
               value={initialValue}
-              onSave={(newValue) => updateRecord({ ...row.original, flaggedNote: newValue })}
+              onSave={(newValue) =>
+                updateRecord({ ...row.original, flaggedNote: newValue })
+              }
               placeholder="Add note..."
             />
           );
@@ -277,7 +302,7 @@ export function DataTable({
             <Trash2 size={16} />
           </button>
         ),
-      }
+      },
     );
 
     return cols;
@@ -290,7 +315,10 @@ export function DataTable({
         accessorKey: "sourceFile",
         header: "Source PDF",
         cell: ({ getValue }) => (
-          <span className="text-xs text-muted-foreground truncate max-w-[120px] block" title={getValue<string>()}>
+          <span
+            className="text-xs text-muted-foreground truncate max-w-[120px] block"
+            title={getValue<string>()}
+          >
             {getValue<string>()}
           </span>
         ),
@@ -323,24 +351,22 @@ export function DataTable({
   // Export handlers
   const handleExportExcel = () => {
     if (data.length === 0) return;
-    
+
     // Process only active table records sorted/filtered in their current order
     const rows = table.getRowModel().rows.map((r, i) => {
       const rec = r.original;
       const formatted: any = {
-        "No": i + 1,
-        "Date": rec.date,
+        No: i + 1,
+        Date: rec.date,
         "Export Number": rec.exportNumber,
         "Barge Number": rec.bargeNumber,
-        "VIN": rec.vin,
+        VIN: rec.vin,
         "First Check": rec.firstCheck,
         "Second Check": rec.secondCheck,
       };
 
-
-
       formatted["Flagged Note"] = rec.flaggedNote;
-      
+
       if (showSourceFile) {
         formatted["Source PDF"] = rec.sourceFile;
       }
@@ -351,12 +377,12 @@ export function DataTable({
     const worksheet = XLSX.utils.json_to_sheet(rows);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Records");
-    
+
     // Fit columns width helper
-    const maxLens = Object.keys(rows[0] || {}).map(key => 
-      Math.max(key.length, ...rows.map(r => String(r[key] || '').length))
+    const maxLens = Object.keys(rows[0] || {}).map((key) =>
+      Math.max(key.length, ...rows.map((r) => String(r[key] || "").length)),
     );
-    worksheet['!cols'] = maxLens.map(len => ({ wch: len + 3 }));
+    worksheet["!cols"] = maxLens.map((len) => ({ wch: len + 3 }));
 
     XLSX.writeFile(workbook, `CargoDoc_${moduleType}_records.xlsx`);
   };
@@ -376,14 +402,14 @@ export function DataTable({
         secondCheck: rec.secondCheck,
       };
 
-
-
       formatted.flaggedNote = rec.flaggedNote;
       formatted.sourceFile = rec.sourceFile;
       return formatted;
     });
 
-    const blob = new Blob([JSON.stringify(rows, null, 2)], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(rows, null, 2)], {
+      type: "application/json",
+    });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -408,7 +434,8 @@ export function DataTable({
             </button>
           )}
           <span className="text-xs text-muted-foreground">
-            Total records: {data.length} | Showing {table.getRowModel().rows.length} rows
+            Total records: {data.length} | Showing{" "}
+            {table.getRowModel().rows.length} rows
           </span>
         </div>
 
@@ -421,7 +448,7 @@ export function DataTable({
             {showSourceFile ? <EyeOff size={14} /> : <Eye size={14} />}
             Source PDF
           </button>
-          
+
           <button
             onClick={clearRecords}
             className="text-xs text-red-500 hover:underline hover:text-red-400 cursor-pointer"
@@ -434,8 +461,11 @@ export function DataTable({
       {/* Main Table Controls */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         {/* Search */}
-        <div className="relative max-w-sm w-full flex-grow">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
+        <div className="relative max-w-sm w-full grow">
+          <Search
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+            size={16}
+          />
           <input
             type="text"
             placeholder="Search records..."
@@ -477,12 +507,15 @@ export function DataTable({
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
-                    <th key={header.id} className="px-4 py-3.5 select-none font-semibold">
+                    <th
+                      key={header.id}
+                      className="px-4 py-3.5 select-none font-semibold"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </th>
                   ))}
@@ -496,14 +529,17 @@ export function DataTable({
                   <tr
                     key={row.id}
                     className={`hover:bg-accent/40 transition-colors ${
-                      isRowInvalid 
-                        ? "bg-red-500/[0.015] hover:bg-red-500/[0.035]" 
+                      isRowInvalid
+                        ? "bg-red-500/[0.015] hover:bg-red-500/[0.035]"
                         : ""
                     }`}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <td key={cell.id} className="px-4 py-2 align-middle">
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
                       </td>
                     ))}
                   </tr>
@@ -563,7 +599,11 @@ interface EditableCellProps {
   placeholder?: string;
 }
 
-function EditableCell({ value, onSave, placeholder = "Verify..." }: EditableCellProps) {
+function EditableCell({
+  value,
+  onSave,
+  placeholder = "Verify...",
+}: EditableCellProps) {
   const [val, setVal] = useState(value);
 
   // Sync state if cell value changes externally (e.g. undo, delete, or file imports)

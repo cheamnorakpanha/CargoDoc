@@ -1,14 +1,17 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { UploadCloud, AlertCircle, FileText } from "lucide-react";
+import { UploadCloud, AlertCircle } from "lucide-react";
 
 interface FileDropzoneProps {
   onFilesSelected: (files: File[]) => void;
   disabled?: boolean;
 }
 
-export function FileDropzone({ onFilesSelected, disabled = false }: FileDropzoneProps) {
+export function FileDropzone({
+  onFilesSelected,
+  disabled = false,
+}: FileDropzoneProps) {
   const [isDragActive, setIsDragActive] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -86,7 +89,7 @@ export function FileDropzone({ onFilesSelected, disabled = false }: FileDropzone
         onClick={handleButtonClick}
         className={`glass-panel border-2 border-dashed rounded-2xl p-10 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 ${
           isDragActive
-            ? "border-primary/80 bg-primary/[0.04] scale-[1.01]"
+            ? "border-primary/80 bg-primary/4 scale-[1.01]"
             : "border-border/80 hover:border-primary/45 hover:bg-secondary/20"
         } ${disabled ? "opacity-50 pointer-events-none cursor-not-allowed" : ""}`}
       >
@@ -100,7 +103,9 @@ export function FileDropzone({ onFilesSelected, disabled = false }: FileDropzone
           disabled={disabled}
         />
 
-        <div className={`p-4 bg-primary/10 rounded-2xl text-primary mb-4 transition-transform duration-300 ${isDragActive ? "scale-110" : ""}`}>
+        <div
+          className={`p-4 bg-primary/10 rounded-2xl text-primary mb-4 transition-transform duration-300 ${isDragActive ? "scale-110" : ""}`}
+        >
           <UploadCloud size={32} />
         </div>
 
