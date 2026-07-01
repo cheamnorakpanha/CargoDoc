@@ -16,7 +16,6 @@ import {
   ArrowUpDown,
   Trash2,
   Undo2,
-  Download,
   Search,
   FileSpreadsheet,
   FileCode,
@@ -306,6 +305,7 @@ export function DataTable({
     );
 
     return cols;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [moduleType, updateRecord, deleteRecord]);
 
   // Filter columns based on visibility states
@@ -333,6 +333,7 @@ export function DataTable({
   }, [columns, showSourceFile]);
 
   // Table setup
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
     columns: visibleColumns,
@@ -355,6 +356,7 @@ export function DataTable({
     // Process only active table records sorted/filtered in their current order
     const rows = table.getRowModel().rows.map((r, i) => {
       const rec = r.original;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const formatted: any = {
         No: i + 1,
         Date: rec.date,
@@ -392,6 +394,7 @@ export function DataTable({
 
     const rows = table.getRowModel().rows.map((r, i) => {
       const rec = r.original;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const formatted: any = {
         no: i + 1,
         date: rec.date,
@@ -530,7 +533,7 @@ export function DataTable({
                     key={row.id}
                     className={`hover:bg-accent/40 transition-colors ${
                       isRowInvalid
-                        ? "bg-red-500/[0.015] hover:bg-red-500/[0.035]"
+                        ? "bg-red-500/1.5 hover:bg-red-500/[0.035]"
                         : ""
                     }`}
                   >
@@ -608,6 +611,7 @@ function EditableCell({
 
   // Sync state if cell value changes externally (e.g. undo, delete, or file imports)
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setVal(value);
   }, [value]);
 
