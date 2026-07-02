@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Sidebar } from "@/components/Sidebar";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const inter = Inter({
@@ -41,6 +42,41 @@ export default function RootLayout({
           <main className="flex-1 flex flex-col min-w-0 p-4 md:p-8 h-screen overflow-y-auto">
             {children}
           </main>
+          
+          {/* Toast notifications */}
+          <Toaster 
+            position="bottom-right" 
+            toastOptions={{
+              style: {
+                background: 'hsl(var(--background))',
+                color: 'hsl(var(--foreground))',
+                border: '1px solid hsl(var(--border))',
+                borderRadius: '0.75rem',
+              },
+              error: {
+                style: {
+                  background: 'hsl(var(--destructive) / 0.1)',
+                  color: 'hsl(var(--destructive))',
+                  border: '1px solid hsl(var(--destructive) / 0.2)',
+                },
+                iconTheme: {
+                  primary: 'hsl(var(--destructive))',
+                  secondary: 'hsl(var(--background))',
+                },
+              },
+              success: {
+                style: {
+                  background: 'hsl(142.1 76.2% 36.3% / 0.1)',
+                  color: 'hsl(142.1 76.2% 36.3%)',
+                  border: '1px solid hsl(142.1 76.2% 36.3% / 0.2)',
+                },
+                iconTheme: {
+                  primary: 'hsl(142.1 76.2% 36.3%)',
+                  secondary: 'hsl(var(--background))',
+                },
+              },
+            }}
+          />
         </ThemeProvider>
       </body>
     </html>

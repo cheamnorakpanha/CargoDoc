@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback } from "react";
+import { toast } from "react-hot-toast";
 import { ExtractedRecord } from "@/features/parser/types";
 import { extractTextFromPdf, renderPageToImage } from "@/utils/pdf";
 import { OCRProviderFactory } from "@/features/ocr/OCRProviderFactory";
@@ -65,11 +66,11 @@ export function useFilePipeline(moduleType: "export" | "import") {
     async (files: File[], ocrApiKey?: string) => {
       if (files.length === 0) return;
       setIsProcessing(true);
-      
+
       const total = files.length;
       let successCount = 0;
       let failedCount = 0;
-      
+
       setProgress({ current: 0, total, successCount: 0, failedCount: 0 });
 
       const newRecords: ExtractedRecord[] = [];
@@ -112,8 +113,10 @@ export function useFilePipeline(moduleType: "export" | "import") {
 
           newRecords.push(...parsedRecords);
           successCount++;
-        } catch (error) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
           console.error(`Error processing file ${file.name}:`, error);
+          toast.error(`Error processing ${file.name}: ${error.message || "Unknown error"}`);
           failedCount++;
         }
 
@@ -144,7 +147,7 @@ export function useFilePipeline(moduleType: "export" | "import") {
 
     return records.map((rec) => {
       const errors = [...rec.validationErrors];
-      
+
       // Dynamic check for duplicate VINs
       if (rec.vin) {
         const normalized = rec.vin.trim().toUpperCase();
