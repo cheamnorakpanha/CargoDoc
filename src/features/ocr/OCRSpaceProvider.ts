@@ -23,7 +23,9 @@ export class OCRSpaceProvider implements BaseOCRProvider {
       });
 
       if (!response.ok) {
-        throw new Error(`OCR.Space API request failed with status: ${response.status}`);
+        const errorText = await response.text().catch(() => "");
+        const errorMessage = errorText ? ` Message: ${errorText}` : "";
+        throw new Error(`OCR.Space API request failed with status: ${response.status}.${errorMessage}`);
       }
 
       const data = await response.json();
