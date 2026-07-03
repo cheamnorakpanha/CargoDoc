@@ -66,8 +66,8 @@ export function Sidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all cursor-pointer ${
                 isActive
-                  ? "bg-primary text-primary-foreground shadow-sm shadow-primary/20 scale-[1.02]"
-                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/40"
+                  ? "bg-primary/20 text-primary shadow-sm shadow-primary/20 scale-[1.02] border border-primary/20"
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/40 hover:backdrop-blur-md hover:border-white/10 border border-transparent"
               }`}
             >
               <Icon size={18} />
@@ -78,7 +78,7 @@ export function Sidebar() {
       </nav>
 
       {/* Privacy Guard Indicator */}
-      <div className="p-4 m-4 bg-primary/3 border border-primary/10 rounded-xl flex items-start gap-2.5">
+      <div className="p-4 m-4 glass-panel border border-primary/10 rounded-xl flex items-start gap-2.5">
         <ShieldCheck size={16} className="text-primary shrink-0 mt-0.5" />
         <div>
           <h4 className="text-xs font-semibold text-foreground">
