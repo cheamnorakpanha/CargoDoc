@@ -207,14 +207,22 @@ export function DataTable({
         accessorKey: "firstCheck",
         header: "First Check",
         cell: ({ row, getValue }) => {
-          const initialValue = getValue<string>();
+          const val = getValue<string>();
+          const isChecked = val === "Yes" || val === "true" || val === "✓";
           return (
-            <EditableCell
-              value={initialValue}
-              onSave={(newValue) =>
-                updateRecord({ ...row.original, firstCheck: newValue })
-              }
-            />
+            <div className="flex items-center justify-center h-full">
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={(e) =>
+                  updateRecord({
+                    ...row.original,
+                    firstCheck: e.target.checked ? "Yes" : "",
+                  })
+                }
+                className="w-4 h-4 text-primary bg-card/50 border-border rounded cursor-pointer accent-primary transition-all hover:scale-110"
+              />
+            </div>
           );
         },
       },
@@ -222,14 +230,22 @@ export function DataTable({
         accessorKey: "secondCheck",
         header: "Second Check",
         cell: ({ row, getValue }) => {
-          const initialValue = getValue<string>();
+          const val = getValue<string>();
+          const isChecked = val === "Yes" || val === "true" || val === "✓";
           return (
-            <EditableCell
-              value={initialValue}
-              onSave={(newValue) =>
-                updateRecord({ ...row.original, secondCheck: newValue })
-              }
-            />
+            <div className="flex items-center justify-center h-full">
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={(e) =>
+                  updateRecord({
+                    ...row.original,
+                    secondCheck: e.target.checked ? "Yes" : "",
+                  })
+                }
+                className="w-4 h-4 text-primary bg-card/50 border-border rounded cursor-pointer accent-primary transition-all hover:scale-110"
+              />
+            </div>
           );
         },
       },
