@@ -1,10 +1,10 @@
-# CargoDoc 📄🚢
+# CargoDoc
 
 **CargoDoc** is a personal productivity web app I built to streamline my freelance logistics work while juggling school. It automates the extraction and verification of shipping data from Import/Export customs declarations and commercial invoices, saving me hours of manual data entry.
 
 Built with modern web technologies, it instantly parses complex PDFs using advanced text extraction and OCR (Optical Character Recognition), turning messy logistics documents into structured, exportable data right in the browser.
 
-## ✨ Key Features
+## Key Features
 
 - **Smart PDF Parsing & OCR:** Automatically reads uploaded logistics PDFs. If the text layer is missing or unreadable, it intelligently falls back to local OCR to extract text from document images.
 - **Automated Data Extraction:** Uses custom regex parsing to accurately identify and extract crucial shipping fields, including:
@@ -16,7 +16,7 @@ Built with modern web technologies, it instantly parses complex PDFs using advan
 - **Export to Excel/JSON:** Once your data is verified and formatted, instantly download the structured records as an Excel spreadsheet (`.xlsx`) or JSON file.
 - **Privacy First (Local Processing):** Your sensitive business documents never leave your computer. All PDF parsing, OCR, and data extraction run **100% locally in your browser's memory**. No data is stored on external servers.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework:** [Next.js](https://nextjs.org/) (React)
 - **PDF Processing:** `pdfjs-dist` (Client-side rendering and text extraction)
@@ -25,7 +25,7 @@ Built with modern web technologies, it instantly parses complex PDFs using advan
 - **Icons:** `lucide-react`
 - **Styling:** Tailwind CSS
 
-## 🚀 Getting Started
+## Getting Started
 
 First, install the dependencies:
 
