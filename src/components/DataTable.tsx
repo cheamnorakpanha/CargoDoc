@@ -426,12 +426,12 @@ export function DataTable({
   return (
     <div className="w-full flex flex-col gap-4 mt-8 animate-fade-in">
       {/* Undo banner & Global Tools */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-secondary/30 border border-border/50 rounded-xl p-3 backdrop-blur-md">
+      <div className="flex flex-wrap items-center justify-between gap-3 glass-panel rounded-xl p-3">
         <div className="flex items-center gap-2">
           {canUndo && (
             <button
               onClick={undoDelete}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-primary text-primary-foreground rounded-lg hover:bg-primary/95 transition-all shadow-sm cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold glass-button bg-primary/80 text-primary-foreground rounded-lg hover:bg-primary/95 transition-all cursor-pointer"
             >
               <Undo2 size={13} /> Undo Delete
             </button>
@@ -482,13 +482,13 @@ export function DataTable({
         <div className="flex items-center gap-2">
           <button
             onClick={handleExportExcel}
-            className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl transition-colors shadow-sm cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold glass-button bg-emerald-600/80 hover:bg-emerald-500 text-white rounded-xl transition-colors cursor-pointer"
           >
             <FileSpreadsheet size={16} /> Export to Excel
           </button>
           <button
             onClick={handleExportJSON}
-            className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold bg-slate-800 hover:bg-slate-700 dark:bg-slate-700 dark:hover:bg-slate-600 text-white rounded-xl transition-colors shadow-sm cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold glass-button bg-slate-800/80 hover:bg-slate-700 dark:bg-slate-700/80 dark:hover:bg-slate-600 text-white rounded-xl transition-colors cursor-pointer"
           >
             <FileCode size={16} /> Export to JSON
           </button>
@@ -503,7 +503,7 @@ export function DataTable({
       )}
 
       {/* Table Container */}
-      <div className="w-full overflow-hidden border border-border/80 rounded-2xl bg-card/30 backdrop-blur-md shadow-sm">
+      <div className="w-full overflow-hidden rounded-2xl glass-panel">
         <div className="overflow-x-auto w-full max-h-[600px] scrollbar-thin">
           <table className="w-full text-left border-collapse table-auto">
             <thead className="sticky top-0 bg-background/90 dark:bg-background/95 backdrop-blur-md border-b border-border/80 z-10 text-xs font-semibold text-muted-foreground">

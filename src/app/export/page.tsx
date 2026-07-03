@@ -4,13 +4,13 @@ import React, { useEffect, useState } from "react";
 import { useFilePipeline } from "@/hooks/useFilePipeline";
 import { FileDropzone } from "@/components/FileDropzone";
 import { DataTable } from "@/components/DataTable";
-import { 
-  ArrowUpRight, 
-  Loader2, 
-  CheckCircle2, 
+import {
+  ArrowUpRight,
+  Loader2,
+  CheckCircle2,
   XCircle,
   FileCheck2,
-  AlertCircle
+  AlertCircle,
 } from "lucide-react";
 
 export default function ExportModule() {
@@ -32,6 +32,7 @@ export default function ExportModule() {
   useEffect(() => {
     // Read the session key on mount
     const key = sessionStorage.getItem("cargodoc_ocr_key") || undefined;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOcrApiKey(key);
   }, []);
 
@@ -48,7 +49,9 @@ export default function ExportModule() {
             <ArrowUpRight size={22} />
           </div>
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-foreground">Export Module</h1>
+            <h1 className="text-xl font-bold tracking-tight text-foreground">
+              Export Module
+            </h1>
             <p className="text-xs text-muted-foreground">
               Extract and verify shipping data from Export logistics documents.
             </p>
@@ -58,7 +61,8 @@ export default function ExportModule() {
         {/* Floating warning if no API key is set */}
         {!ocrApiKey && records.length === 0 && (
           <div className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-lg text-[10px] font-semibold animate-pulse">
-            <AlertCircle size={12} /> Using free-tier OCR Space (Key: helloworld)
+            <AlertCircle size={12} /> Using free-tier OCR Space (Key:
+            helloworld)
           </div>
         )}
       </div>
@@ -82,26 +86,39 @@ export default function ExportModule() {
             </div>
 
             <div className="space-y-1.5 w-full">
-              <h3 className="font-bold text-base text-foreground">Processing Documents</h3>
+              <h3 className="font-bold text-base text-foreground">
+                Processing Documents
+              </h3>
               <p className="text-xs text-muted-foreground truncate px-4">
-                Parsing: <span className="font-mono font-medium text-foreground">{currentFileName}</span>
+                Parsing:{" "}
+                <span className="font-mono font-medium text-foreground">
+                  {currentFileName}
+                </span>
               </p>
             </div>
 
             {/* Progress stats */}
             <div className="grid grid-cols-3 gap-2 w-full pt-2 text-xs font-semibold">
               <div className="bg-secondary/40 p-2.5 rounded-xl border border-border/40">
-                <span className="text-[10px] text-muted-foreground block uppercase">Completed</span>
-                <span className="text-foreground font-mono">{progress.current} / {progress.total}</span>
+                <span className="text-[10px] text-muted-foreground block uppercase">
+                  Completed
+                </span>
+                <span className="text-foreground font-mono">
+                  {progress.current} / {progress.total}
+                </span>
               </div>
               <div className="bg-emerald-500/5 text-emerald-500 p-2.5 rounded-xl border border-emerald-500/10 flex flex-col items-center justify-center">
-                <span className="text-[10px] text-muted-foreground block uppercase">Success</span>
+                <span className="text-[10px] text-muted-foreground block uppercase">
+                  Success
+                </span>
                 <span className="font-mono flex items-center gap-1">
                   <CheckCircle2 size={12} /> {progress.successCount}
                 </span>
               </div>
               <div className="bg-red-500/5 text-red-500 p-2.5 rounded-xl border border-red-500/10 flex flex-col items-center justify-center">
-                <span className="text-[10px] text-muted-foreground block uppercase">Failed</span>
+                <span className="text-[10px] text-muted-foreground block uppercase">
+                  Failed
+                </span>
                 <span className="font-mono flex items-center gap-1">
                   <XCircle size={12} /> {progress.failedCount}
                 </span>
@@ -123,7 +140,8 @@ export default function ExportModule() {
                 multiple
                 accept=".pdf,application/pdf"
                 onChange={(e) => {
-                  if (e.target.files) handleFilesSelected(Array.from(e.target.files));
+                  if (e.target.files)
+                    handleFilesSelected(Array.from(e.target.files));
                 }}
                 className="hidden"
               />
