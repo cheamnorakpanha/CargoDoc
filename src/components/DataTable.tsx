@@ -106,7 +106,7 @@ export function DataTable({
             className="flex items-center gap-1 hover:text-foreground transition-colors cursor-pointer"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Export Number <ArrowUpDown size={14} />
+            Invoice No <ArrowUpDown size={14} />
           </button>
         ),
         cell: ({ row, getValue }) => {
