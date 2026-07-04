@@ -447,7 +447,7 @@ export function DataTable({
           {canUndo && (
             <button
               onClick={undoDelete}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold glass-button bg-primary/80 text-primary-foreground rounded-lg hover:bg-primary/95 transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-primary/80 text-primary-foreground rounded-lg hover:bg-primary/95 transition-all cursor-pointer shadow-sm"
             >
               <Undo2 size={13} /> Undo Delete
             </button>
@@ -498,13 +498,13 @@ export function DataTable({
         <div className="flex items-center gap-2">
           <button
             onClick={handleExportExcel}
-            className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold glass-button bg-emerald-600/80 hover:bg-emerald-500 text-white rounded-xl transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold bg-emerald-600/80 hover:bg-emerald-500 text-white rounded-xl transition-colors cursor-pointer shadow-sm"
           >
             <FileSpreadsheet size={16} /> Export to Excel
           </button>
           <button
             onClick={handleExportJSON}
-            className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold glass-button bg-slate-800/80 hover:bg-slate-700 dark:bg-slate-700/80 dark:hover:bg-slate-600 text-white rounded-xl transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold bg-slate-800/80 hover:bg-slate-700 dark:bg-slate-700/80 dark:hover:bg-slate-600 text-white rounded-xl transition-colors cursor-pointer shadow-sm"
           >
             <FileCode size={16} /> Export to JSON
           </button>
