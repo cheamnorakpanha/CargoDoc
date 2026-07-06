@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Sidebar } from "@/components/Sidebar";
@@ -10,10 +10,22 @@ const inter = Inter({
   variable: "--font-sans",
 });
 
+import type { Metadata, Viewport } from "next";
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+};
+
 export const metadata: Metadata = {
   title: "CargoDoc - PDF Data Extraction Tool",
   description:
     "Automate PDF text and OCR extraction for shipping and taxation documents.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "CargoDoc",
+  },
 };
 
 export default function RootLayout({
