@@ -3,9 +3,9 @@ import {
   ArrowUpRight,
   ArrowDownLeft,
   ShieldAlert,
-  Cpu,
   FileCheck2,
 } from "lucide-react";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -13,8 +13,14 @@ export default function Home() {
       {/* Welcome Card - Glassmorphism */}
       <div className="glass-panel rounded-3xl p-8 md:p-12 shadow-xl flex flex-col space-y-6">
         <div className="flex items-center gap-3 text-primary">
-          <div className="w-12 h-12 bg-primary/10 flex items-center justify-center rounded-2xl">
-            <Cpu size={24} />
+          <div className="w-12 h-12 flex items-center justify-center rounded-xl overflow-hidden shadow-sm bg-primary/5">
+            <Image
+              src="/cargodoc.png"
+              alt="CargoDoc Logo"
+              width={48}
+              height={48}
+              className="object-cover w-full h-full"
+            />
           </div>
           <div>
             <span className="text-xs font-mono uppercase tracking-widest text-primary/80">

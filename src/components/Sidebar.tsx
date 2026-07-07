@@ -1,14 +1,13 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   ArrowUpRight,
   ArrowDownLeft,
   Settings,
-  FileSpreadsheet,
   ShieldCheck,
 } from "lucide-react";
 
@@ -42,15 +41,21 @@ export function Sidebar() {
     <aside className="w-64 glass-panel border-r shrink-0 hidden md:flex flex-col h-[calc(100vh-2rem)] sticky top-0 m-4 rounded-2xl shadow-lg transition-all duration-300">
       {/* Brand Header */}
       <div className="p-6 border-b border-border/50 flex items-center gap-3">
-        <div className="w-9 h-9 bg-primary/10 text-primary flex items-center justify-center rounded-xl">
-          <FileSpreadsheet size={20} />
+        <div className="w-12 h-12 flex items-center justify-center rounded-xl overflow-hidden shadow-sm bg-primary/5">
+          <Image
+            src="/cargodoc.png"
+            alt="CargoDoc Logo"
+            width={48}
+            height={48}
+            className="object-cover w-full h-full"
+          />
         </div>
-        <div>
-          <h1 className="font-bold text-base tracking-tight text-foreground">
+        <div className="flex flex-col">
+          <h1 className="font-bold text-lg tracking-tight text-foreground">
             CargoDoc
           </h1>
-          <span className="text-[10px] text-muted-foreground font-mono">
-            v1.0.0
+          <span className="text-[12px] text-muted-foreground font-mono">
+            v1.1.7
           </span>
         </div>
       </div>

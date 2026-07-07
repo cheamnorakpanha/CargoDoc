@@ -2,16 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { 
-  Settings as SettingsIcon, 
-  Sun, 
-  Moon, 
-  Monitor, 
-  Key, 
+import {
+  Settings as SettingsIcon,
+  Sun,
+  Moon,
+  Monitor,
+  Key,
   Info,
   CheckCircle,
   Eye,
-  EyeOff
+  EyeOff,
 } from "lucide-react";
 
 export default function Settings() {
@@ -66,7 +66,8 @@ export default function Settings() {
           Appearance
         </h2>
         <p className="text-xs text-muted-foreground">
-          Select how you want CargoDoc to look on your screen. This preference will be saved locally.
+          Select how you want CargoDoc to look on your screen. This preference
+          will be saved locally.
         </p>
 
         <div className="grid grid-cols-3 gap-3 max-w-md pt-2">
@@ -101,8 +102,10 @@ export default function Settings() {
           OCR Provider Configuration
         </h2>
         <p className="text-xs text-muted-foreground">
-          CargoDoc uses OCR.Space to extract text from scanned PDFs. Your API key is stored 
-          <strong> only in session memory </strong> and is cleared when you close the browser tab.
+          CargoDoc uses OCR.Space to extract text from scanned PDFs. Your API
+          key is stored
+          <strong> only in session memory </strong> and is cleared when you
+          close the browser tab.
         </p>
 
         <form onSubmit={handleSaveApiKey} className="space-y-4 pt-2">
@@ -127,7 +130,16 @@ export default function Settings() {
               </button>
             </div>
             <p className="text-[10px] text-muted-foreground">
-              Don't have a key? You can get a free one from <a href="https://ocr.space/OCRAPI" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">ocr.space/OCRAPI</a>.
+              Don't have a key? You can get a free one from{" "}
+              <a
+                href="https://ocr.space/OCRAPI"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline font-medium"
+              >
+                ocr.space/OCRAPI
+              </a>
+              .
             </p>
           </div>
 
@@ -147,7 +159,7 @@ export default function Settings() {
                 Clear Key
               </button>
             )}
-            
+
             {saveSuccess && (
               <span className="text-emerald-500 text-xs font-semibold flex items-center gap-1 animate-fade-in">
                 <CheckCircle size={14} /> Saved successfully!
@@ -163,25 +175,36 @@ export default function Settings() {
           <Info size={18} className="text-primary" /> About CargoDoc
         </h2>
         <p className="text-xs text-muted-foreground leading-relaxed">
-          CargoDoc is a secure, serverless document parsing assistant designed for single-user offline workflows. 
-          It runs entirely inside the browser sandboxed environment.
+          CargoDoc is a secure, serverless document parsing assistant designed
+          for single-user offline workflows. It runs entirely inside the browser
+          sandboxed environment.
         </p>
 
         <div className="grid grid-cols-2 gap-4 max-w-md pt-2 text-xs font-medium">
           <div className="flex flex-col gap-1 border-r border-border/50 pr-4">
-            <span className="text-muted-foreground text-[10px] uppercase font-semibold">Application Version</span>
-            <span className="text-foreground font-mono">1.0.0 (Stable)</span>
+            <span className="text-muted-foreground text-[10px] uppercase font-semibold">
+              Application Version
+            </span>
+            <span className="text-foreground font-mono">1.1.7 (Stable)</span>
           </div>
           <div className="flex flex-col gap-1 pl-2">
-            <span className="text-muted-foreground text-[10px] uppercase font-semibold">PDF Engine</span>
-            <span className="text-foreground font-mono">pdf.js v4.x (Client)</span>
+            <span className="text-muted-foreground text-[10px] uppercase font-semibold">
+              PDF Engine
+            </span>
+            <span className="text-foreground font-mono">
+              pdf.js v4.x (Client)
+            </span>
           </div>
           <div className="flex flex-col gap-1 border-r border-border/50 pr-4 pt-2">
-            <span className="text-muted-foreground text-[10px] uppercase font-semibold">OCR Provider</span>
+            <span className="text-muted-foreground text-[10px] uppercase font-semibold">
+              OCR Provider
+            </span>
             <span className="text-foreground font-mono">OCR.Space (API)</span>
           </div>
           <div className="flex flex-col gap-1 pl-2 pt-2">
-            <span className="text-muted-foreground text-[10px] uppercase font-semibold">Privacy Level</span>
+            <span className="text-muted-foreground text-[10px] uppercase font-semibold">
+              Privacy Level
+            </span>
             <span className="text-foreground text-emerald-500 flex items-center gap-1 font-semibold">
               <CheckCircle size={12} /> Local-Only
             </span>
