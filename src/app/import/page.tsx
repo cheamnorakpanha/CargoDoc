@@ -77,7 +77,7 @@ export default function ImportModule() {
 
       {/* Processing Loader Overlay */}
       {isProcessing && (
-        <div className="flex-grow flex flex-col items-center justify-center py-16 max-w-xl mx-auto w-full">
+        <div className="grow flex flex-col items-center justify-center py-16 max-w-xl mx-auto w-full">
           <div className="glass-panel w-full rounded-2xl p-8 shadow-lg flex flex-col items-center text-center space-y-6 animate-pulse">
             <div className="relative flex items-center justify-center">
               <Loader2 className="text-primary animate-spin" size={40} />
