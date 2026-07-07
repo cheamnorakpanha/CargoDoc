@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 
 export default function Settings() {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [apiKey, setApiKey] = useState("");
   const [showKey, setShowKey] = useState(false);
@@ -23,6 +23,7 @@ export default function Settings() {
 
   // Set mounted state to prevent hydration mismatches
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     // Load API Key from sessionStorage on client load
     const storedKey = sessionStorage.getItem("cargodoc_ocr_key") || "";
@@ -130,7 +131,7 @@ export default function Settings() {
               </button>
             </div>
             <p className="text-[10px] text-muted-foreground">
-              Don't have a key? You can get a free one from{" "}
+              Don&apos;t have a key? You can get a free one from{" "}
               <a
                 href="https://ocr.space/OCRAPI"
                 target="_blank"
@@ -205,7 +206,7 @@ export default function Settings() {
             <span className="text-muted-foreground text-[10px] uppercase font-semibold">
               Privacy Level
             </span>
-            <span className="text-foreground text-emerald-500 flex items-center gap-1 font-semibold">
+            <span className="text-emerald-500 flex items-center gap-1 font-semibold">
               <CheckCircle size={12} /> Local-Only
             </span>
           </div>
