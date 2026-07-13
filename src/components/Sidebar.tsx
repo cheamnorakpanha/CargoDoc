@@ -10,6 +10,7 @@ import {
   Settings,
   ShieldCheck,
 } from "lucide-react";
+import packageJson from "../../package.json";
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -55,7 +56,7 @@ export function Sidebar() {
             CargoDoc
           </h1>
           <span className="text-[12px] text-muted-foreground font-mono">
-            v1.1.7
+            {packageJson.version} (Stable)
           </span>
         </div>
       </div>
