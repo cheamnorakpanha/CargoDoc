@@ -14,6 +14,8 @@ import {
   EyeOff,
 } from "lucide-react";
 
+import packageJson from "../../../package.json";
+
 export default function Settings() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -186,7 +188,9 @@ export default function Settings() {
             <span className="text-muted-foreground text-[10px] uppercase font-semibold">
               Application Version
             </span>
-            <span className="text-foreground font-mono">1.1.7 (Stable)</span>
+            <span className="text-foreground font-mono">
+              {packageJson.version} (Stable)
+            </span>
           </div>
           <div className="flex flex-col gap-1 pl-2">
             <span className="text-muted-foreground text-[10px] uppercase font-semibold">
