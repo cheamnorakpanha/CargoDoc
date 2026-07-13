@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { ExtractedRecord } from "@/features/parser/types";
 import { extractTextFromPdf, renderPageToImage } from "@/utils/pdf";
@@ -14,6 +14,7 @@ export interface ProgressState {
 
 export function useFilePipeline(moduleType: "export" | "import") {
   const [records, setRecords] = useState<ExtractedRecord[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [currentFileName, setCurrentFileName] = useState("");
   const [progress, setProgress] = useState<ProgressState>({
@@ -25,6 +26,27 @@ export function useFilePipeline(moduleType: "export" | "import") {
 
   // History stack for undo deleted records
   const [deletedHistory, setDeletedHistory] = useState<ExtractedRecord[][]>([]);
+
+  // Load from local storage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem(`cargodoc_records_${moduleType}`);
+    if (saved) {
+      try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setRecords(JSON.parse(saved));
+      } catch (e) {
+        console.error("Failed to parse saved records", e);
+      }
+    }
+    setIsLoaded(true);
+  }, [moduleType]);
+
+  // Save to local storage on changes
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem(`cargodoc_records_${moduleType}`, JSON.stringify(records));
+    }
+  }, [records, moduleType, isLoaded]);
 
   // Clear all data
   const clearRecords = useCallback(() => {
