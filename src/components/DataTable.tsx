@@ -26,6 +26,7 @@ import {
   EyeOff,
 } from "lucide-react";
 import * as XLSX from "xlsx";
+import { toast } from "react-hot-toast";
 
 interface DataTableProps {
   data: ExtractedRecord[];
@@ -84,17 +85,23 @@ export function DataTable({
             row.original.validationErrors.includes("Invalid Date format");
           return (
             <div
-              className={`font-mono text-sm px-2 py-1 rounded select-all cursor-pointer flex items-center justify-between group ${
+              className={`font-mono text-sm px-2 py-1 rounded cursor-pointer flex items-center justify-between group ${
                 hasError ? "bg-red-500/10 text-red-500 font-semibold" : ""
               }`}
               onDoubleClick={() => handleCopy(val, `${row.id}-date`)}
               title="Double click to copy"
             >
-              <span>{val || "MISSING"}</span>
-              <Copy
-                size={12}
-                className="opacity-0 group-hover:opacity-60 transition-opacity ml-2"
-              />
+              <span className="select-all">{val || "MISSING"}</span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCopy(val, `${row.id}-date`);
+                }}
+                className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 hover:text-primary cursor-pointer p-1"
+                title="Click to copy"
+              >
+                <Copy size={12} />
+              </button>
             </div>
           );
         },
@@ -116,17 +123,23 @@ export function DataTable({
           );
           return (
             <div
-              className={`font-mono text-sm px-2 py-1 rounded select-all cursor-pointer flex items-center justify-between group ${
+              className={`font-mono text-sm px-2 py-1 rounded cursor-pointer flex items-center justify-between group ${
                 hasError ? "bg-red-500/10 text-red-500 font-semibold" : ""
               }`}
               onDoubleClick={() => handleCopy(val, `${row.id}-exp`)}
               title="Double click to copy"
             >
-              <span>{val || "MISSING"}</span>
-              <Copy
-                size={12}
-                className="opacity-0 group-hover:opacity-60 transition-opacity ml-2"
-              />
+              <span className="select-all">{val || "MISSING"}</span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCopy(val, `${row.id}-exp`);
+                }}
+                className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 hover:text-primary cursor-pointer p-1"
+                title="Click to copy"
+              >
+                <Copy size={12} />
+              </button>
             </div>
           );
         },
@@ -145,15 +158,21 @@ export function DataTable({
           const val = getValue<string>();
           return (
             <div
-              className="font-mono text-sm px-2 py-1 rounded select-all cursor-pointer flex items-center justify-between group"
+              className="font-mono text-sm px-2 py-1 rounded cursor-pointer flex items-center justify-between group"
               onDoubleClick={() => handleCopy(val, `${row.id}-barge`)}
               title="Double click to copy"
             >
-              <span>{val || "-"}</span>
-              <Copy
-                size={12}
-                className="opacity-0 group-hover:opacity-60 transition-opacity ml-2"
-              />
+              <span className="select-all">{val || "-"}</span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCopy(val, `${row.id}-barge`);
+                }}
+                className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 hover:text-primary cursor-pointer p-1"
+                title="Click to copy"
+              >
+                <Copy size={12} />
+              </button>
             </div>
           );
         },
@@ -188,17 +207,23 @@ export function DataTable({
 
           return (
             <div
-              className={`font-mono text-sm px-2 py-1 rounded select-all cursor-pointer flex items-center justify-between group ${vinStyle}`}
+              className={`font-mono text-sm px-2 py-1 rounded cursor-pointer flex items-center justify-between group ${vinStyle}`}
               onDoubleClick={() => handleCopy(val, `${row.id}-vin`)}
               title={
                 isDuplicate ? "Duplicate VIN detected" : "Double click to copy"
               }
             >
-              <span>{val || "MISSING"}</span>
-              <Copy
-                size={12}
-                className="opacity-0 group-hover:opacity-60 transition-opacity ml-2"
-              />
+              <span className="select-all">{val || "MISSING"}</span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCopy(val, `${row.id}-vin`);
+                }}
+                className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 hover:text-primary cursor-pointer p-1"
+                title="Click to copy"
+              >
+                <Copy size={12} />
+              </button>
             </div>
           );
         },
