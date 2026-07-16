@@ -4,6 +4,7 @@ import { ExtractedRecord } from "@/features/parser/types";
 import { extractTextFromPdf, renderPageToImage } from "@/utils/pdf";
 import { OCRProviderFactory } from "@/features/ocr/OCRProviderFactory";
 import { ParserFactory } from "@/features/parser/ParserFactory";
+import * as XLSX from "xlsx";
 
 export interface ProgressState {
   current: number;
@@ -104,11 +105,47 @@ export function useFilePipeline(moduleType: "export" | "import") {
 
         try {
           // 1. Validation checks
-          if (file.type !== "application/pdf" && !file.name.endsWith(".pdf")) {
-            throw new Error("File is not a PDF");
+          const isPDF = file.type === "application/pdf" || file.name.endsWith(".pdf");
+          const isExcel = file.name.endsWith(".xlsx") || file.name.endsWith(".xls");
+
+          if (!isPDF && !isExcel) {
+            throw new Error("File is not a supported format (PDF/Excel)");
           }
           if (file.size > 30 * 1024 * 1024) {
             throw new Error("File size exceeds 30 MB limit");
+          }
+
+          // Handle Excel files directly
+          if (isExcel) {
+            const buffer = await file.arrayBuffer();
+            const workbook = XLSX.read(buffer, { type: "array" });
+            const sheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[sheetName];
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const jsonData = XLSX.utils.sheet_to_json<any>(worksheet);
+
+            const parsedRecords: ExtractedRecord[] = jsonData.map((row) => ({
+              id: crypto.randomUUID(),
+              sourceFile: row["Source PDF"] || file.name,
+              date: row["Date"] || "",
+              exportNumber: row["Export Number"] || row["Invoice No"] || "",
+              bargeNumber: row["Barge Number"] || "",
+              vin: row["VIN"] || "",
+              firstCheck: row["First Check"] || "",
+              secondCheck: row["Second Check"] || "",
+              flaggedNote: row["Flagged Note"] || "",
+              isValid: true,
+              validationErrors: [],
+            }));
+
+            newRecords.push(...parsedRecords);
+            successCount++;
+            setProgress((prev) => ({
+              ...prev,
+              successCount,
+              failedCount,
+            }));
+            continue;
           }
 
           // 2. Direct PDF Text Layer Extraction

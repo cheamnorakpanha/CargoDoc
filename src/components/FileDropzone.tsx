@@ -42,8 +42,10 @@ export function FileDropzone({
     }
 
     for (const file of filesArray) {
-      if (file.type !== "application/pdf" && !file.name.endsWith(".pdf")) {
-        setErrorMsg(`"${file.name}" is not a PDF file.`);
+      const isPDF = file.type === "application/pdf" || file.name.endsWith(".pdf");
+      const isExcel = file.name.endsWith(".xlsx") || file.name.endsWith(".xls");
+      if (!isPDF && !isExcel) {
+        setErrorMsg(`"${file.name}" is not a supported file (PDF or Excel).`);
         return;
       }
       if (file.size > 30 * 1024 * 1024) {
@@ -97,7 +99,7 @@ export function FileDropzone({
           ref={fileInputRef}
           type="file"
           multiple
-          accept=".pdf,application/pdf"
+          accept=".pdf,application/pdf,.xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
           onChange={handleChange}
           className="hidden"
           disabled={disabled}
@@ -110,14 +112,14 @@ export function FileDropzone({
         </div>
 
         <h3 className="font-bold text-base text-foreground mb-1">
-          Drag and drop PDF files here
+          Drag and drop PDF or Excel files here
         </h3>
         <p className="text-xs text-muted-foreground mb-4">
           or click to browse from your device
         </p>
 
         <div className="flex items-center gap-4 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider bg-secondary/30 border border-border/40 px-3 py-1 rounded-lg">
-          <span>Max 50 PDFs</span>
+          <span>Max 50 Files</span>
           <span className="w-1.5 h-1.5 rounded-full bg-border"></span>
           <span>Max 30MB each</span>
         </div>

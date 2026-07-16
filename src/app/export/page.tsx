@@ -134,11 +134,11 @@ export default function ExportModule() {
           {/* Quick upload-more drop zone (smaller version or simple inputs can be used, but since we have a table, letting them clear is clean, or we can provide a small upload button) */}
           <div className="flex justify-end mb-2">
             <label className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary hover:bg-secondary/80 text-foreground border border-border text-xs font-semibold rounded-lg shadow-sm cursor-pointer transition-all">
-              <FileCheck2 size={14} /> Add More PDFs
+              <FileCheck2 size={14} /> Add More Files
               <input
                 type="file"
                 multiple
-                accept=".pdf,application/pdf"
+                accept=".pdf,application/pdf,.xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
                 onChange={(e) => {
                   if (e.target.files)
                     handleFilesSelected(Array.from(e.target.files));
