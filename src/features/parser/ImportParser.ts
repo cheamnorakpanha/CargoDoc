@@ -24,13 +24,32 @@ export class ImportParser extends BaseParser {
       const bargeNumber = this.extractBargeNumber(pageText);
       const vins = this.extractVINs(pageText);
 
+      const powerMatch = pageText.match(/POWER[:\s]+([^\n\r]+)/i);
+      const yearMatch = pageText.match(/YEAR[:\s]+(\d{4})/i);
+
+      let extractedAmount = "";
+      const amountTableMatch = pageText.match(/Amount\s+1\.00\s*(?:\$\s*)?([\d,]+\.\d{2})/i);
+      if (amountTableMatch) {
+         extractedAmount = amountTableMatch[1];
+      } else {
+         const fallbackMatch = pageText.match(/Amount[\s\S]{1,50}?([\d,]+\.\d{2})/i);
+         if (fallbackMatch) {
+             extractedAmount = fallbackMatch[1];
+         }
+      }
+
       const baseRecord = {
         sourceFile: fileName,
         date,
         exportNumber,
         bargeNumber,
+        power: powerMatch ? powerMatch[1].trim() : "",
+        year: yearMatch ? yearMatch[1].trim() : "",
+        amount: extractedAmount,
         firstCheck: "",
         secondCheck: "",
+        thirdCheck: "",
+        fourthCheck: "",
         flaggedNote: "",
       };
 
