@@ -309,7 +309,7 @@ export function DataTable({
               </div>
             );
           },
-        }
+        },
       );
     }
 
@@ -359,7 +359,7 @@ export function DataTable({
             </div>
           );
         },
-      }
+      },
     );
 
     if (moduleType === "import") {
@@ -409,7 +409,7 @@ export function DataTable({
               </div>
             );
           },
-        }
+        },
       );
     }
 
@@ -576,7 +576,9 @@ export function DataTable({
     );
     worksheet["!cols"] = maxLens.map((len) => ({ wch: len + 3 }));
 
-    XLSX.writeFile(workbook, `CargoDoc_${moduleType}_records.xlsx`);
+    const today = new Date();
+    const dateStr = `${String(today.getDate()).padStart(2, "0")}-${String(today.getMonth() + 1).padStart(2, "0")}-${today.getFullYear()}`;
+    XLSX.writeFile(workbook, `CargoDoc_${moduleType}_${dateStr}.xlsx`);
   };
 
   const handleExportJSON = () => {
@@ -618,7 +620,11 @@ export function DataTable({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `CargoDoc_${moduleType}_records.json`;
+
+    const today = new Date();
+    const dateStr = `${String(today.getDate()).padStart(2, "0")}-${String(today.getMonth() + 1).padStart(2, "0")}-${today.getFullYear()}`;
+    a.download = `CargoDoc_${moduleType}_${dateStr}.json`;
+
     a.click();
     URL.revokeObjectURL(url);
   };
