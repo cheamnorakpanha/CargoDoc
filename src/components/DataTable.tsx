@@ -228,6 +228,92 @@ export function DataTable({
           );
         },
       },
+    ];
+
+    if (moduleType === "import") {
+      cols.push(
+        {
+          accessorKey: "power",
+          header: "Power",
+          cell: ({ row, getValue }) => {
+            const val = getValue<string>();
+            return (
+              <div
+                className="font-mono text-sm px-2 py-1 rounded cursor-pointer flex items-center justify-between group"
+                onDoubleClick={() => handleCopy(val, `${row.id}-power`)}
+                title="Double click to copy"
+              >
+                <span className="select-all">{val || "-"}</span>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCopy(val, `${row.id}-power`);
+                  }}
+                  className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 hover:text-primary cursor-pointer p-1"
+                  title="Click to copy"
+                >
+                  <Copy size={12} />
+                </button>
+              </div>
+            );
+          },
+        },
+        {
+          accessorKey: "year",
+          header: "Year",
+          cell: ({ row, getValue }) => {
+            const val = getValue<string>();
+            return (
+              <div
+                className="font-mono text-sm px-2 py-1 rounded cursor-pointer flex items-center justify-between group"
+                onDoubleClick={() => handleCopy(val, `${row.id}-year`)}
+                title="Double click to copy"
+              >
+                <span className="select-all">{val || "-"}</span>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCopy(val, `${row.id}-year`);
+                  }}
+                  className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 hover:text-primary cursor-pointer p-1"
+                  title="Click to copy"
+                >
+                  <Copy size={12} />
+                </button>
+              </div>
+            );
+          },
+        },
+        {
+          accessorKey: "amount",
+          header: "Amount",
+          cell: ({ row, getValue }) => {
+            const val = getValue<string>();
+            return (
+              <div
+                className="font-mono text-sm px-2 py-1 rounded cursor-pointer flex items-center justify-between group"
+                onDoubleClick={() => handleCopy(val, `${row.id}-amount`)}
+                title="Double click to copy"
+              >
+                <span className="select-all">{val || "-"}</span>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCopy(val, `${row.id}-amount`);
+                  }}
+                  className="opacity-0 group-hover:opacity-100 transition-opacity ml-2 hover:text-primary cursor-pointer p-1"
+                  title="Click to copy"
+                >
+                  <Copy size={12} />
+                </button>
+              </div>
+            );
+          },
+        }
+      );
+    }
+
+    cols.push(
       {
         accessorKey: "firstCheck",
         header: "First Check",
@@ -273,8 +359,59 @@ export function DataTable({
             </div>
           );
         },
-      },
-    ];
+      }
+    );
+
+    if (moduleType === "import") {
+      cols.push(
+        {
+          accessorKey: "thirdCheck",
+          header: "Third Check",
+          cell: ({ row, getValue }) => {
+            const val = getValue<string>();
+            const isChecked = val === "Yes" || val === "true" || val === "✓";
+            return (
+              <div className="flex items-center justify-center h-full">
+                <input
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={(e) =>
+                    updateRecord({
+                      ...row.original,
+                      thirdCheck: e.target.checked ? "Yes" : "",
+                    })
+                  }
+                  className="w-4 h-4 text-primary bg-card/50 border-border rounded cursor-pointer accent-primary transition-all hover:scale-110"
+                />
+              </div>
+            );
+          },
+        },
+        {
+          accessorKey: "fourthCheck",
+          header: "Fourth Check",
+          cell: ({ row, getValue }) => {
+            const val = getValue<string>();
+            const isChecked = val === "Yes" || val === "true" || val === "✓";
+            return (
+              <div className="flex items-center justify-center h-full">
+                <input
+                  type="checkbox"
+                  checked={isChecked}
+                  onChange={(e) =>
+                    updateRecord({
+                      ...row.original,
+                      fourthCheck: e.target.checked ? "Yes" : "",
+                    })
+                  }
+                  className="w-4 h-4 text-primary bg-card/50 border-border rounded cursor-pointer accent-primary transition-all hover:scale-110"
+                />
+              </div>
+            );
+          },
+        }
+      );
+    }
 
     cols.push(
       {
@@ -404,9 +541,21 @@ export function DataTable({
         "Export Number": rec.exportNumber,
         "Barge Number": rec.bargeNumber,
         VIN: rec.vin,
-        "First Check": rec.firstCheck,
-        "Second Check": rec.secondCheck,
       };
+
+      if (moduleType === "import") {
+        formatted["Power"] = rec.power || "";
+        formatted["Year"] = rec.year || "";
+        formatted["Amount"] = rec.amount || "";
+      }
+
+      formatted["First Check"] = rec.firstCheck;
+      formatted["Second Check"] = rec.secondCheck;
+
+      if (moduleType === "import") {
+        formatted["Third Check"] = rec.thirdCheck || "";
+        formatted["Fourth Check"] = rec.fourthCheck || "";
+      }
 
       formatted["Flagged Note"] = rec.flaggedNote;
 
@@ -442,9 +591,21 @@ export function DataTable({
         exportNumber: rec.exportNumber,
         bargeNumber: rec.bargeNumber,
         vin: rec.vin,
-        firstCheck: rec.firstCheck,
-        secondCheck: rec.secondCheck,
       };
+
+      if (moduleType === "import") {
+        formatted.power = rec.power || "";
+        formatted.year = rec.year || "";
+        formatted.amount = rec.amount || "";
+      }
+
+      formatted.firstCheck = rec.firstCheck;
+      formatted.secondCheck = rec.secondCheck;
+
+      if (moduleType === "import") {
+        formatted.thirdCheck = rec.thirdCheck || "";
+        formatted.fourthCheck = rec.fourthCheck || "";
+      }
 
       formatted.flaggedNote = rec.flaggedNote;
       formatted.sourceFile = rec.sourceFile;
