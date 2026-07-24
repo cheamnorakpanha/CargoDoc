@@ -137,7 +137,6 @@ export function useFilePipeline(moduleType: "export" | "import") {
               firstCheck: row["First Check"] || "",
               secondCheck: row["Second Check"] || "",
               thirdCheck: row["Third Check"] || "",
-              fourthCheck: row["Fourth Check"] || "",
               flaggedNote: row["Flagged Note"] || "",
               isValid: true,
               validationErrors: [],

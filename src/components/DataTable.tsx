@@ -387,29 +387,6 @@ export function DataTable({
             );
           },
         },
-        {
-          accessorKey: "fourthCheck",
-          header: "Fourth Check",
-          cell: ({ row, getValue }) => {
-            const val = getValue<string>();
-            const isChecked = val === "Yes" || val === "true" || val === "✓";
-            return (
-              <div className="flex items-center justify-center h-full">
-                <input
-                  type="checkbox"
-                  checked={isChecked}
-                  onChange={(e) =>
-                    updateRecord({
-                      ...row.original,
-                      fourthCheck: e.target.checked ? "Yes" : "",
-                    })
-                  }
-                  className="w-4 h-4 text-primary bg-card/50 border-border rounded cursor-pointer accent-primary transition-all hover:scale-110"
-                />
-              </div>
-            );
-          },
-        },
       );
     }
 
@@ -554,7 +531,6 @@ export function DataTable({
 
       if (moduleType === "import") {
         formatted["Third Check"] = rec.thirdCheck || "";
-        formatted["Fourth Check"] = rec.fourthCheck || "";
       }
 
       formatted["Flagged Note"] = rec.flaggedNote;
@@ -606,7 +582,6 @@ export function DataTable({
 
       if (moduleType === "import") {
         formatted.thirdCheck = rec.thirdCheck || "";
-        formatted.fourthCheck = rec.fourthCheck || "";
       }
 
       formatted.flaggedNote = rec.flaggedNote;

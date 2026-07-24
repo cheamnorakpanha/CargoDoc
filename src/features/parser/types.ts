@@ -11,7 +11,6 @@ export interface ExtractedRecord {
   firstCheck: string;
   secondCheck: string;
   thirdCheck?: string;
-  fourthCheck?: string;
   flaggedNote: string;
   isValid: boolean;
   validationErrors: string[];

@@ -43,13 +43,12 @@ export class ImportParser extends BaseParser {
         date,
         exportNumber,
         bargeNumber,
-        power: powerMatch ? powerMatch[1].trim() : "",
+        power: powerMatch ? powerMatch[1].replace(/\s+/g, "") : "",
         year: yearMatch ? yearMatch[1].trim() : "",
         amount: extractedAmount,
         firstCheck: "",
         secondCheck: "",
         thirdCheck: "",
-        fourthCheck: "",
         flaggedNote: "",
       };
 
